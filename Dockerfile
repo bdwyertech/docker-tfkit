@@ -17,6 +17,7 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
+ENV HOME=/tfkit
 WORKDIR /tfkit
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["kitchen"]
