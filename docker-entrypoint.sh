@@ -9,6 +9,7 @@ fi
 
 # Kitchen Wrapper & Passthrough
 case "$1" in
+	console ) kitchen "$*";;
 	converge ) kitchen "$*";;
 	create ) kitchen "$*";;
 	destroy ) kitchen "$*";;
