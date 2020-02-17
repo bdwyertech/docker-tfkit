@@ -1,0 +1,7 @@
+# Detect text files automatically
+* text=auto
+
+# Force LF line ending on these files
+docker-manifest/* eol=lf
+hooks/* eol=lf
+*.sh eol=lf
