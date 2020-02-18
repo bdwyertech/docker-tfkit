@@ -1,5 +1,22 @@
 FROM ruby:2.6-alpine
 
+ARG BUILD_DATE
+ARG VCS_REF
+
+LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
+      org.opencontainers.image.description="Infrastrucure as code development & testing via kitchen-terraform" \
+      org.opencontainers.image.authors="Brian Dwyer <bdwyertech@github.com>" \
+      org.opencontainers.image.url="https://hub.docker.com/r/bdwyertech/tfkit" \
+      org.opencontainers.image.source="https://github.com/bdwyertech/docker-tfkit.git" \
+      org.opencontainers.image.revision=$VCS_REF \
+      org.opencontainers.image.created=$BUILD_DATE \
+      org.label-schema.name="bdwyertech/tfkit" \
+      org.label-schema.description="Infrastrucure as code development & testing via kitchen-terraform" \
+      org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
+      org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git"\
+      org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.build-date=$BUILD_DATE
+
 COPY Gemfile Gemfile.lock /
 
 RUN apk add --no-cache --virtual .build-deps build-base \
