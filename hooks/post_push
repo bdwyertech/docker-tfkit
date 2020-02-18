@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-DATETAG="$(date -u +'%Y-%m-%d')-$SOURCE_COMMIT"
+DATETAG="$(date -u +'%Y-%m-%d')--$(git rev-parse --short HEAD)"
 
 docker tag "$IMAGE_NAME" "${DOCKER_REPO}:${DATETAG}"
 docker push "${DOCKER_REPO}:${DATETAG}"
