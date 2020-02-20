@@ -4,3 +4,4 @@ gem 'kitchen-terraform'
 
 gem 'awspec'
 gem 'kitchen-verifier-awspec'
+gem 'rhcl'
