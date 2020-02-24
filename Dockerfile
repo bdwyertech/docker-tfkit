@@ -27,14 +27,17 @@ RUN apk add --no-cache --virtual .build-deps build-base \
 RUN apk add bash curl git \
     && git clone https://github.com/tfutils/tfenv.git /opt/tfenv \
     && ln -s /opt/tfenv/bin/* /usr/local/bin \
-    && tfenv install
+    && tfenv install \
+    && adduser tfkit -h /tfkit -D \
+    && chown -R root:tfkit /opt/tfenv/version* \
+    && chmod g+rw /opt/tfenv/version*
 
 ENV KITCHEN_YAML=.kitchen.tf.yml
 ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-ENV HOME=/tfkit
+USER tfkit
 WORKDIR /tfkit
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["kitchen"]
