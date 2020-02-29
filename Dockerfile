@@ -20,6 +20,7 @@ LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
 COPY Gemfile Gemfile.lock /
 
 RUN apk add --no-cache --virtual .build-deps build-base \
+    && gem uninstall -i /usr/local/lib/ruby/gems/2.6.0 minitest \
     && gem install bundler \
     && bundle install \
     && apk del .build-deps
