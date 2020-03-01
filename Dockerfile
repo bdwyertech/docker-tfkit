@@ -29,7 +29,7 @@ RUN apk add bash curl git \
     && git clone https://github.com/tfutils/tfenv.git /opt/tfenv \
     && ln -s /opt/tfenv/bin/* /usr/local/bin \
     && tfenv install \
-    && adduser tfkit -h /tfkit -D \
+    && adduser tfkit -h /home/tfkit -D \
     && chown -R root:tfkit /opt/tfenv/version* \
     && chmod g+rw /opt/tfenv/version*
 
