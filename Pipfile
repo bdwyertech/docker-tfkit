@@ -1,0 +1,16 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+python_version = "3.8"
+
+[packages]
+terrascan = "*"
+
+[dev-packages]
+pipenv-to-requirements = "*"
+
+[scripts]
+pin = 'pipenv_to_requirements -o requirements.txt -f'

@@ -4,14 +4,14 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
-      org.opencontainers.image.description="Infrastrucure as code development & testing via kitchen-terraform" \
+      org.opencontainers.image.description="Infrastructure as code development & testing via kitchen-terraform" \
       org.opencontainers.image.authors="Brian Dwyer <bdwyertech@github.com>" \
       org.opencontainers.image.url="https://hub.docker.com/r/bdwyertech/tfkit" \
       org.opencontainers.image.source="https://github.com/bdwyertech/docker-tfkit.git" \
       org.opencontainers.image.revision=$VCS_REF \
       org.opencontainers.image.created=$BUILD_DATE \
       org.label-schema.name="bdwyertech/tfkit" \
-      org.label-schema.description="Infrastrucure as code development & testing via kitchen-terraform" \
+      org.label-schema.description="Infrastructure as code development & testing via kitchen-terraform" \
       org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
       org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git"\
       org.label-schema.vcs-ref=$VCS_REF \
@@ -35,6 +35,11 @@ RUN apk add bash curl git \
 
 ENV KITCHEN_YAML=.kitchen.tf.yml
 ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
+
+# TerraScan (Python)
+COPY requirements.txt /
+RUN apk add python3 && python3 -m pip install --upgrade pip \
+    && python3 -m pip install -r requirements.txt
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
