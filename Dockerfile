@@ -28,8 +28,8 @@ RUN apk add --no-cache --virtual .build-deps build-base \
 RUN apk add bash curl git \
     && git clone https://github.com/tfutils/tfenv.git /opt/tfenv \
     && ln -s /opt/tfenv/bin/* /usr/local/bin \
-    && tfenv install \
     && adduser tfkit -h /home/tfkit -D \
+    && echo 'latest' > /opt/tfenv/version \
     && chown -R root:tfkit /opt/tfenv/version* \
     && chmod g+rw /opt/tfenv/version*
 
