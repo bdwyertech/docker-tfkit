@@ -25,7 +25,7 @@ RUN apk add --no-cache --virtual .build-deps build-base \
     && bundle install \
     && apk del .build-deps
 
-RUN apk add bash curl git \
+RUN apk add bash curl git openssh-client \
     && git clone https://github.com/tfutils/tfenv.git /opt/tfenv \
     && ln -s /opt/tfenv/bin/* /usr/local/bin \
     && adduser tfkit -h /home/tfkit -D \
