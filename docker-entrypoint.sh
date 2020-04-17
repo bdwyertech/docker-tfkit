@@ -9,6 +9,9 @@ fi
 
 # Kitchen Wrapper & Passthrough
 case "$1" in
+	#
+	# Test-Kitchen
+	#
 	console ) kitchen "$@";;
 	converge ) kitchen "$@";;
 	create ) kitchen "$@";;
@@ -25,5 +28,28 @@ case "$1" in
 	verify ) kitchen "$@";;
 	version ) kitchen "$@";;
 	-*) kitchen "$@";;
+	#
+	# Terraform
+	#
+	apply ) terraform "$@";;
+	plan ) terraform "$@";;
+	env ) terraform "$@";;
+	fmt ) terraform "$@";;
+	get ) terraform "$@";;
+	graph ) terraform "$@";;
+	import ) terraform "$@";;
+	output ) terraform "$@";;
+	providers ) terraform "$@";;
+	show ) terraform "$@";;
+	taint ) terraform "$@";;
+	untaint ) terraform "$@";;
+	validate ) terraform "$@";;
+	workspace ) terraform "$@";;
+	0.12upgrade ) terraform "$@";;
+	force-unlock ) terraform "$@";;
+	state ) terraform "$@";;
+	#
+	# Other
+	#
 	* )	exec "$@";;
 esac
