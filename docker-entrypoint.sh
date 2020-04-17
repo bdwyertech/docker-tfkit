@@ -31,6 +31,7 @@ case "$1" in
 	#
 	# Terraform
 	#
+	tf ) terraform "$@";;
 	apply ) terraform "$@";;
 	plan ) terraform "$@";;
 	env ) terraform "$@";;
