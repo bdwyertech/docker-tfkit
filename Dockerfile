@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
       org.label-schema.name="bdwyertech/tfkit" \
       org.label-schema.description="Infrastructure as code development & testing via kitchen-terraform" \
       org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
-      org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git"\
+      org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.build-date=$BUILD_DATE
 
@@ -43,6 +43,10 @@ RUN apk add python3 && python3 -m pip install --upgrade pip \
     && python3 -m pip install -r requirements.txt
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+# TerraGrunt
+RUN (curl -sfL https://dl.google.com/go/go1.14.3.linux-amd64.tar.gz | tar zxf - --directory /usr/local/) \
+    && export PATH=/usr/local/go/bin:$PATH
 
 USER tfkit
 WORKDIR /tfkit
