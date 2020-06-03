@@ -6,3 +6,6 @@ gem 'kitchen-terraform'
 gem 'awspec'
 gem 'kitchen-verifier-awspec'
 gem 'rhcl'
+
+gem 'inspec-bin'
+gem 'inspec-iggy'
