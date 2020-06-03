@@ -1071,8 +1071,6 @@ GEM
       train-core (~> 3.0)
       tty-prompt (~> 0.17)
       tty-table (~> 0.10)
-    inspec-iggy (0.8.0)
-      inspec (>= 3, < 5)
     ipaddress (0.8.3)
     jmespath (1.4.0)
     json (2.3.0)
@@ -1335,7 +1333,6 @@ PLATFORMS
 DEPENDENCIES
   awspec
   inspec-bin
-  inspec-iggy
   kitchen-inspec
   kitchen-terraform
   kitchen-verifier-awspec

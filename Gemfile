@@ -8,4 +8,3 @@ gem 'kitchen-verifier-awspec'
 gem 'rhcl'
 
 gem 'inspec-bin'
-gem 'inspec-iggy'
