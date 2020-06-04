@@ -1,4 +1,4 @@
-FROM ruby:2.6-alpine
+FROM ruby:2.7-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -20,17 +20,21 @@ LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
 COPY Gemfile Gemfile.lock /
 
 RUN apk add --no-cache --virtual .build-deps build-base \
-    && gem uninstall -i /usr/local/lib/ruby/gems/2.6.0 minitest \
-    && gem uninstall -i /usr/local/lib/ruby/gems/2.6.0 rake -x \
+    && gem uninstall -i /usr/local/lib/ruby/gems/2.7.0 minitest \
+    && gem uninstall -i /usr/local/lib/ruby/gems/2.7.0 rake -x \
     && gem install bundler \
     && bundle install \
     && apk del .build-deps
+
+# Hide deprecation warnings (dry-logic-0.6.1 and dry-types-0.14.1)
+ENV RUBYOPT='-W:no-deprecated -W:no-experimental'
 
 RUN apk add bash curl git make openssh-client \
     && git clone https://github.com/tfutils/tfenv.git /opt/tfenv \
     && ln -s /opt/tfenv/bin/* /usr/local/bin \
     && adduser tfkit -h /home/tfkit -D \
     && echo 'latest' > /opt/tfenv/version \
+    && mkdir /opt/tfenv/versions/ \
     && chown -R root:tfkit /opt/tfenv/version* \
     && chmod g+rw /opt/tfenv/version*
 
