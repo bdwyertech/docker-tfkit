@@ -46,7 +46,7 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 # TerraScan (Python)
 COPY requirements.txt /
-RUN apk add python3 && python3 -m pip install --upgrade pip \
+RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
     && python3 -m pip install -r requirements.txt
 
 # TFLint
