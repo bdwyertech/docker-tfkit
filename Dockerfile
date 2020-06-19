@@ -46,8 +46,10 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 # TerraScan (Python)
 COPY requirements.txt /
-RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
-    && python3 -m pip install -r requirements.txt
+RUN apk add --no-cache --virtual .build-deps build-base \
+    && apk add python3 py3-pip && python3 -m pip install --upgrade pip \
+    && python3 -m pip install -r requirements.txt \
+    && apk del .build-deps
 
 # TFLint
 RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
