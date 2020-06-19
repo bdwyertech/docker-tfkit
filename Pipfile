@@ -9,9 +9,13 @@ python_version = "3.8"
 [packages]
 cookiecutter = "*"
 terrascan = "*"
+azure-cli = "*"
 
 [dev-packages]
 pipenv-to-requirements = "*"
 
 [scripts]
 pin = 'pipenv_to_requirements -o requirements.txt -f'
+
+[pipenv]
+allow_prereleases = true
