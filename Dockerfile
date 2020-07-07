@@ -47,7 +47,7 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 # TerraScan (Python)
 COPY requirements.txt /
 RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
-    && apk add --no-cache --virtual .build-deps build-base python3-dev \
+    && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
     && python3 -m pip install -r requirements.txt \
     && apk del .build-deps
 
