@@ -14,17 +14,15 @@ adal==1.2.4
 antlr4-python3-runtime==4.7.2
 applicationinsights==0.11.9
 argcomplete==1.12.0
-arrow==0.15.8 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
+arrow==0.16.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
 azure-batch==9.0.0
-azure-cli-command-modules-nspkg==2.0.3
-azure-cli-core==2.10.1
-azure-cli-nspkg==3.0.4
-azure-cli-telemetry==1.0.4
-azure-cli==2.10.1
+azure-cli-core==2.11.1
+azure-cli-telemetry==1.0.6
+azure-cli==2.11.1
 azure-common==1.1.25
-azure-core==1.8.0
+azure-core==1.8.1
 azure-cosmos==3.2.0
-azure-datalake-store==0.0.49
+azure-datalake-store==0.0.50
 azure-functions-devops-build==0.0.22
 azure-graphrbac==0.60.0
 azure-keyvault==1.1.0
@@ -40,12 +38,12 @@ azure-mgmt-billing==0.2.0
 azure-mgmt-botservice==0.2.0
 azure-mgmt-cdn==5.0.0
 azure-mgmt-cognitiveservices==6.2.0
-azure-mgmt-compute==13.0.0
+azure-mgmt-compute==13.1.0
 azure-mgmt-consumption==2.0.0
 azure-mgmt-containerinstance==1.5.0
 azure-mgmt-containerregistry==3.0.0rc14
 azure-mgmt-containerservice==9.0.1
-azure-mgmt-core==1.0.0
+azure-mgmt-core==1.2.0
 azure-mgmt-cosmosdb==0.15.0
 azure-mgmt-datalake-analytics==0.2.1
 azure-mgmt-datalake-nspkg==3.0.1
@@ -56,12 +54,12 @@ azure-mgmt-devtestlabs==4.0.0
 azure-mgmt-dns==2.1.0
 azure-mgmt-eventgrid==3.0.0rc7
 azure-mgmt-eventhub==4.0.0
-azure-mgmt-hdinsight==1.6.0
+azure-mgmt-hdinsight==1.7.0
 azure-mgmt-imagebuilder==0.4.0
 azure-mgmt-iotcentral==3.0.0
 azure-mgmt-iothub==0.12.0
 azure-mgmt-iothubprovisioningservices==0.2.0
-azure-mgmt-keyvault==2.2.0
+azure-mgmt-keyvault==7.0.0
 azure-mgmt-kusto==0.3.0
 azure-mgmt-loganalytics==0.7.0
 azure-mgmt-managedservices==1.0.0
@@ -71,7 +69,7 @@ azure-mgmt-marketplaceordering==0.2.1
 azure-mgmt-media==2.2.0
 azure-mgmt-monitor==0.11.0
 azure-mgmt-msi==0.2.0
-azure-mgmt-netapp==0.11.0
+azure-mgmt-netapp==0.12.0
 azure-mgmt-network==11.0.0
 azure-mgmt-nspkg==3.0.2
 azure-mgmt-policyinsights==0.5.0
@@ -80,10 +78,10 @@ azure-mgmt-rdbms==2.2.0
 azure-mgmt-recoveryservices==0.4.0
 azure-mgmt-recoveryservicesbackup==0.6.0
 azure-mgmt-redhatopenshift==0.1.0
-azure-mgmt-redis==7.0.0rc1
+azure-mgmt-redis==7.0.0rc2
 azure-mgmt-relay==0.1.0
 azure-mgmt-reservations==0.6.0
-azure-mgmt-resource==10.1.0
+azure-mgmt-resource==10.2.0
 azure-mgmt-search==2.1.0
 azure-mgmt-security==0.4.1
 azure-mgmt-servicebus==0.6.0
@@ -92,15 +90,18 @@ azure-mgmt-signalr==0.4.0
 azure-mgmt-sql==0.19.0
 azure-mgmt-sqlvirtualmachine==0.5.0
 azure-mgmt-storage==11.1.0
+azure-mgmt-synapse==0.3.0
 azure-mgmt-trafficmanager==0.51.0
 azure-mgmt-web==0.47.0
-azure-multiapi-storage==0.3.7
+azure-multiapi-storage==0.4.1
 azure-nspkg==3.0.2
 azure-storage-common==1.4.2
-bcrypt==3.1.7 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
+azure-synapse-accesscontrol==0.2.0
+azure-synapse-spark==0.2.0
+bcrypt==3.2.0 ; python_version >= '3.6'
 binaryornot==0.4.4
 certifi==2020.6.20
-cffi==1.14.1
+cffi==1.14.3
 chardet==3.0.4
 click==7.1.2 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
 colorama==0.4.3 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
@@ -122,15 +123,15 @@ markupsafe==1.1.1 ; python_version >= '2.7' and python_version not in '3.0, 3.1,
 mock==4.0.2 ; python_version >= '3.6'
 msal-extensions==0.1.3
 msal==1.0.0
-msrest==0.6.18
+msrest==0.6.19
 msrestazure==0.6.4
 oauthlib==3.1.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
-paramiko==2.7.1
+paramiko==2.7.2
 pkginfo==1.5.0.1
 portalocker==1.7.1
 poyo==0.5.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 pycparser==2.20 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
-pygments==2.6.1 ; python_version >= '3.5'
+pygments==2.7.1 ; python_version >= '3.5'
 pyhcl==0.4.4
 pyjwt[crypto]==1.7.1
 pynacl==1.4.0 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
