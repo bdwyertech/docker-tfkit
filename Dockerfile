@@ -15,7 +15,10 @@ LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
       org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
       org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git"\
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.build-date=$BUILD_DATE
+      org.label-schema.build-date=$BUILD_DATE \
+      org.tooling.user=tfkit \
+      org.tooling.uid=1000 \
+      org.tooling.gid=1000
 
 COPY Gemfile Gemfile.lock /
 
@@ -32,7 +35,7 @@ ENV RUBYOPT='-W:no-deprecated -W:no-experimental'
 RUN apk add bash curl git make openssh-client \
     && git clone https://github.com/tfutils/tfenv.git /opt/tfenv \
     && ln -s /opt/tfenv/bin/* /usr/local/bin \
-    && adduser tfkit -h /home/tfkit -D \
+    && adduser tfkit -h /home/tfkit -D -u 1000 \
     && echo 'latest' > /opt/tfenv/version \
     && mkdir /opt/tfenv/versions/ \
     && chown -R root:tfkit /opt/tfenv/version* \
