@@ -1,0 +1,51 @@
+version: 2
+updates:
+- package-ecosystem: bundler
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "08:00"
+    timezone: America/New_York
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: inspec-bin
+    versions:
+    - 4.25.1
+    - 4.26.4
+    - 4.28.0
+    - 4.29.3
+    - 4.32.0
+  - dependency-name: kitchen-terraform
+    versions:
+    - 5.7.2
+  - dependency-name: kitchen-inspec
+    versions:
+    - 2.3.0
+    - 2.4.0
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "08:00"
+    timezone: America/New_York
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: checkov
+    versions:
+    - 2.0.34
+    - 2.0.55
+  - dependency-name: azure-cli
+    versions:
+    - 2.20.0
+    - 2.21.0
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: weekly
+    time: "08:00"
+    timezone: America/New_York
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: ruby
+    versions:
+    - 3.0.0.pre.alpine
