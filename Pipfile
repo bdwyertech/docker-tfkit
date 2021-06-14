@@ -9,7 +9,7 @@ python_version = "3.8"
 [packages]
 cookiecutter = "*"
 azure-cli = "*"
-checkov = "==2.0.160"
+checkov = "==2.0.193"
 
 [dev-packages]
 pipenv-to-requirements = "*"
