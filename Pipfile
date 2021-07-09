@@ -8,8 +8,11 @@ python_version = "3.8"
 
 [packages]
 cookiecutter = "*"
-azure-cli = "*"
-checkov = "==2.0.160"
+azure-cli = "2.26.0"
+checkov = "==2.0.259"
+
+# Pinning because of some kid of dependency conflict in 2.6.x (7/9/21)
+networkx = "==2.5.1"
 
 [dev-packages]
 pipenv-to-requirements = "*"
