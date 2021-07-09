@@ -1,4 +1,4 @@
-FROM ruby:3-alpine
+FROM ruby:3.0-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -21,6 +21,8 @@ LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
       org.tooling.gid=1000
 
 COPY Gemfile Gemfile.lock /
+
+USER root
 
 RUN apk add --no-cache --virtual .build-deps build-base \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.0.0 minitest \
