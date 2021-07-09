@@ -42,6 +42,8 @@ jobs:
           images: |
             ${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.IMAGE_NAME }}
+          labels: |
+            org.opencontainers.image.title=bdwyertech/tfkit
           flavor: |
             latest=true
           tags: |
