@@ -12,7 +12,7 @@ azure-cli = "2.26.0"
 checkov = "==2.0.259"
 
 # Pinning because of some kid of dependency conflict in 2.6.x (7/9/21)
-networkx = "==2.5.1"
+networkx = "==2.6.2"
 
 [dev-packages]
 pipenv-to-requirements = "*"
