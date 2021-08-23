@@ -8,7 +8,7 @@ python_version = "3.8"
 
 [packages]
 cookiecutter = "*"
-azure-cli = "2.27.0"
+azure-cli = "2.27.2"
 checkov = "==2.0.340"
 
 # Pinning because of some kid of dependency conflict in 2.6.x (7/9/21)
