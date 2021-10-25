@@ -62,10 +62,10 @@ RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
 RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
 
 # Terrascan
-RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.4.0/terrascan_1.4.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
+RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.12.0/terrascan_1.12.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
 
 # TerraGrunt
-ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.28.7/terragrunt_linux_amd64 /usr/local/bin/terragrunt
+ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.4/terragrunt_linux_amd64 /usr/local/bin/terragrunt
 RUN chmod +x /usr/local/bin/terragrunt
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
