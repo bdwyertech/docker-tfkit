@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
       org.label-schema.name="bdwyertech/tfkit" \
       org.label-schema.description="Infrastructure as code development & testing via kitchen-terraform" \
       org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
-      org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git"\
+      org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.build-date=$BUILD_DATE \
       org.tooling.user=tfkit \
@@ -55,7 +55,7 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 COPY requirements.txt /
 RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
     && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
-    && python3 -m pip install -r requirements.txt \
+    && python3 -m pip install -r requirements.txt --ignore-installed six \
     && apk del .build-deps
 
 # TFLint
