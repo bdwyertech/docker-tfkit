@@ -9,7 +9,7 @@ python_version = "3.8"
 [packages]
 cookiecutter = "*"
 azure-cli = "2.29.1"
-checkov = "==2.0.514"
+checkov = "==2.0.654"
 
 # Pinning because of some kid of dependency conflict in 2.6.x (7/9/21)
 # networkx = "==2.5.1"
