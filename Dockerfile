@@ -65,7 +65,7 @@ RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint
 RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.12.0/terrascan_1.12.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
 
 # TerraGrunt
-ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.4/terragrunt_linux_amd64 /usr/local/bin/terragrunt
+ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.14/terragrunt_linux_amd64 /usr/local/bin/terragrunt
 RUN chmod +x /usr/local/bin/terragrunt
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
