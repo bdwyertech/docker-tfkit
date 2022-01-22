@@ -27,7 +27,7 @@ USER root
 RUN apk add --no-cache --virtual .build-deps build-base \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.0.0 minitest \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.0.0 rake -x \
-    && gem install bundler \
+    && gem install bundler:2.3.5 \
     && bundle install \
     && apk del .build-deps
 
@@ -53,7 +53,7 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 # TerraScan (Python)
 COPY requirements.txt /
-RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
+RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip wheel \
     && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
     && python3 -m pip install -r requirements.txt --ignore-installed six \
     && apk del .build-deps
@@ -62,11 +62,14 @@ RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip \
 RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
 
 # Terrascan
-RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.12.0/terrascan_1.12.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
+RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.13.0/terrascan_1.13.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
 
 # TerraGrunt
-ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.35.14/terragrunt_linux_amd64 /usr/local/bin/terragrunt
+ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.0/terragrunt_linux_amd64 /usr/local/bin/terragrunt
 RUN chmod +x /usr/local/bin/terragrunt
+
+# Azure CLI Login
+RUN wget -qO- https://github.com/bdwyertech/go-az/releases/download/v0.0.12/az_linux_amd64.tar.gz | tar zxf - --directory /usr/local/bin
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 

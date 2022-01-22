@@ -8,8 +8,7 @@ python_version = "3.8"
 
 [packages]
 cookiecutter = "*"
-azure-cli = "2.31.0"
-checkov = "==2.0.661"
+checkov = "*"
 
 # Pinning because of some kid of dependency conflict in 2.6.x (7/9/21)
 # networkx = "==2.5.1"
@@ -21,4 +20,4 @@ pipenv-to-requirements = "*"
 pin = 'pipenv_to_requirements -o requirements.txt -f'
 
 [pipenv]
-allow_prereleases = true
+# allow_prereleases = true
