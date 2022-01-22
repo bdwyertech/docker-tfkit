@@ -29,7 +29,8 @@ RUN apk add --no-cache --virtual .build-deps build-base \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.0.0 rake -x \
     && gem install bundler:2.3.5 \
     && bundle install \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && rm -rf ~/.bundle
 
 # Hide deprecation warnings (dry-logic-0.6.1 and dry-types-0.14.1)
 ENV RUBYOPT='-W:no-deprecated -W:no-experimental'
@@ -56,7 +57,8 @@ COPY requirements.txt /
 RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip wheel \
     && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
     && python3 -m pip install -r requirements.txt --ignore-installed six \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && rm -rf ~/.cache
 
 # TFLint
 RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
