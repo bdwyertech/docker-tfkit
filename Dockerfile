@@ -67,7 +67,7 @@ RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint
 RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.13.0/terrascan_1.13.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
 
 # TerraGrunt
-ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.0/terragrunt_linux_amd64 /usr/local/bin/terragrunt
+ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.1/terragrunt_linux_amd64 /usr/local/bin/terragrunt
 RUN chmod +x /usr/local/bin/terragrunt
 
 # Azure CLI Login
