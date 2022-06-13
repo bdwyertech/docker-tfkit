@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [requires]
-python_version = "3.8"
+python_version = "3.10"
 
 [packages]
 cookiecutter = "*"
@@ -12,7 +12,6 @@ checkov = "*"
 
 # Pinning because of some kid of dependency conflict in 2.6.x (7/9/21)
 # networkx = "==2.5.1"
-
 [dev-packages]
 pipenv-to-requirements = "*"
 

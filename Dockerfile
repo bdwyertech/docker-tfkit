@@ -1,4 +1,4 @@
-FROM ruby:3.0-alpine3.13
+FROM ruby:3.0-alpine3.16
 
 ARG BUILD_DATE
 ARG VCS_REF
