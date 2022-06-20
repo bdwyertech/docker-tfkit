@@ -58,7 +58,7 @@ lark==1.1.2
 markdown==3.3.7 ; python_version >= '3.6'
 markupsafe==2.1.1 ; python_version >= '3.7'
 multidict==6.0.2 ; python_version >= '3.7'
-networkx==2.8.3 ; python_version >= '3.8'
+networkx==2.8.4 ; python_version >= '3.8'
 packageurl-python==0.9.9 ; python_version >= '3.6'
 packaging==21.3 ; python_version >= '3.6'
 ply==3.11
