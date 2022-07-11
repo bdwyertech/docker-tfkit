@@ -22,7 +22,7 @@ bc-python-hcl2==0.3.42 ; python_version >= '3.7'
 beautifulsoup4==4.11.1 ; python_version >= '3.6'
 binaryornot==0.4.4
 boto3==1.24.7 ; python_version >= '3.7'
-botocore==1.27.7 ; python_version >= '3.7'
+botocore==1.27.26 ; python_version >= '3.7'
 cached-property==1.5.2
 cachetools==5.2.0 ; python_version ~= '3.7'
 certifi==2022.5.18.1 ; python_version >= '3.6'
