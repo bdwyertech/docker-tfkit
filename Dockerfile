@@ -30,7 +30,7 @@ RUN apk add --no-cache --virtual .build-deps build-base git \
     && gem install bundler:2.3.15 \
     && bundle install \
     && apk del .build-deps \
-    && rm -rf ~/.bundle
+    && rm -rf ~/.bundle Gemfile Gemfile.lock
 
 # Hide deprecation warnings (dry-logic-0.6.1 and dry-types-0.14.1)
 ENV RUBYOPT='-W:no-deprecated -W:no-experimental'
@@ -58,24 +58,22 @@ RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip wheel \
     && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
     && python3 -m pip install -r requirements.txt --ignore-installed six \
     && apk del .build-deps \
-    && rm -rf ~/.cache
+    && rm -rf ~/.cache requirements.txt
 
 # TFLint
 RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
 
 # Terrascan
-RUN wget -qO- https://github.com/accurics/terrascan/releases/download/v1.13.0/terrascan_1.13.0_Linux_x86_64.tar.gz | tar zxf - --directory /usr/local/bin
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/accurics/terrascan/releases/latest | grep -o -E "https://.+?Linux_x86_64.tar.gz")" | tar zxf - --directory /usr/local/bin)
 
 # TFSec
-ADD https://github.com/aquasecurity/tfsec/releases/download/v1.13.2/tfsec-linux-amd64 /usr/local/bin/tfsec
-RUN chmod +x /usr/local/bin/tfsec
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-amd64" | head -1)" -o /usr/local/bin/tfsec && chmod +x /usr/local/bin/tfsec)
 
 # TerraGrunt
-ADD https://github.com/gruntwork-io/terragrunt/releases/download/v0.36.6/terragrunt_linux_amd64 /usr/local/bin/terragrunt
-RUN chmod +x /usr/local/bin/terragrunt
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep -o -E "https://.+?terragrunt_linux_amd64")" -o /usr/local/bin/terragrunt && chmod +x /usr/local/bin/terragrunt)
 
 # Azure CLI Login
-RUN wget -qO- https://github.com/bdwyertech/go-az/releases/download/v0.0.12/az_linux_amd64.tar.gz | tar zxf - --directory /usr/local/bin
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/bdwyertech/go-az/releases/latest | grep -o -E "https://.+?az_linux_arm64.tar.gz")" | tar zxf - --directory /usr/local/bin)
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
