@@ -62,7 +62,7 @@ networkx==2.8.5 ; python_version >= '3.8'
 packageurl-python==0.10.0 ; python_version >= '3.6'
 packaging==21.3 ; python_version >= '3.6'
 ply==3.11
-policy-sentry==0.12.3 ; python_version >= '3.6'
+policy-sentry==0.12.4 ; python_version >= '3.6'
 policyuniverse==1.5.0.20220613 ; python_version >= '3.7'
 prettytable==3.3.0 ; python_version >= '3.7'
 pycares==4.2.1
