@@ -1,4 +1,4 @@
-FROM ruby:3.1-alpine3.17
+FROM ruby:3.2-alpine3.17
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -25,8 +25,8 @@ COPY Gemfile Gemfile.lock /
 USER root
 
 RUN apk add --no-cache --virtual .build-deps build-base git \
-    && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 minitest \
-    && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 rake -x \
+    && gem uninstall -i /usr/local/lib/ruby/gems/3.2.0 minitest \
+    && gem uninstall -i /usr/local/lib/ruby/gems/3.2.0 rake -x \
     && gem install bundler:2.3.15 \
     && bundle install \
     && apk del .build-deps \
@@ -54,9 +54,11 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 # TerraScan (Python)
 COPY requirements.txt /
-RUN apk add python3 py3-pip && python3 -m pip install --upgrade pip wheel \
-    && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
-    && python3 -m pip install -r requirements.txt --ignore-installed six \
+RUN apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main python3 \
+    && apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community py3-pip \
+    && python3 -m pip install --upgrade pip wheel \
+    && apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main --virtual .build-deps build-base python3-dev openssl-dev \
+    && python3 -m pip install --no-cache-dir -r requirements.txt --ignore-installed six \
     && apk del .build-deps \
     && rm -rf ~/.cache requirements.txt
 

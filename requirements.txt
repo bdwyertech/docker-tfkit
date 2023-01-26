@@ -71,8 +71,6 @@ pycares==4.3.0
 pycep-parser==0.3.9 ; python_version >= '3.7' and python_version < '4.0'
 pycparser==2.21
 pyrsistent==0.19.3 ; python_version >= '3.7'
-pyston-autoload==2.3.5 ; python_version < '3.11' and (sys_platform == 'linux' or sys_platform == 'darwin') and platform_machine == 'x86_64' and implementation_name == 'cpython'
-pyston==2.3.5 ; python_version < '3.11' and (sys_platform == 'linux' or sys_platform == 'darwin') and platform_machine == 'x86_64' and implementation_name == 'cpython'
 python-dateutil==2.8.2 ; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2'
 python-slugify==7.0.0 ; python_version >= '3.7'
 pyyaml==6.0 ; python_version >= '3.6'
