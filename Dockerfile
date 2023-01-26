@@ -1,4 +1,4 @@
-FROM ruby:3.2-alpine3.17
+FROM ruby:3.1-alpine3.17
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -25,8 +25,8 @@ COPY Gemfile Gemfile.lock /
 USER root
 
 RUN apk add --no-cache --virtual .build-deps build-base git \
-    && gem uninstall -i /usr/local/lib/ruby/gems/3.2.0 minitest \
-    && gem uninstall -i /usr/local/lib/ruby/gems/3.2.0 rake -x \
+    && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 minitest \
+    && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 rake -x \
     && gem install bundler:2.3.15 \
     && bundle install \
     && apk del .build-deps \
