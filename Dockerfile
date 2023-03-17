@@ -27,7 +27,7 @@ USER root
 RUN apk add --no-cache --virtual .build-deps build-base git \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 minitest \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 rake -x \
-    && gem install bundler:2.3.15 \
+    && gem install bundler:2.4.5 \
     && bundle install \
     && apk del .build-deps \
     && rm -rf ~/.bundle Gemfile Gemfile.lock
@@ -61,6 +61,9 @@ RUN apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/m
     && python3 -m pip install --no-cache-dir -r requirements.txt --ignore-installed six \
     && apk del .build-deps \
     && rm -rf ~/.cache requirements.txt
+
+# YQ
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/mikefarah/yq/releases/latest | grep -o -E "https://.+?_linux_amd64" -m 1)" -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq)
 
 # TFLint
 RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
