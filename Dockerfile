@@ -1,4 +1,4 @@
-FROM ruby:3.1-alpine3.17
+FROM ruby:3.1-alpine3.19
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -54,11 +54,9 @@ ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
 
 # TerraScan (Python)
 COPY requirements.txt /
-RUN apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main python3 \
-    && apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community py3-pip \
-    && python3 -m pip install --upgrade pip wheel \
-    && apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main --virtual .build-deps build-base python3-dev openssl-dev \
-    && python3 -m pip install --no-cache-dir -r requirements.txt --ignore-installed six \
+RUN apk add --no-cache python3 py3-pip \
+    && apk add --no-cache --virtual .build-deps build-base python3-dev openssl-dev \
+    && python3 -m pip install --no-cache-dir --break-system-packages -r requirements.txt --ignore-installed six  \
     && apk del .build-deps \
     && rm -rf ~/.cache requirements.txt
 
