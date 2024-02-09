@@ -44,10 +44,10 @@ RUN apk add bash curl git make openssh-client \
     && chown -R root:tfkit /opt/tfenv/version* \
     && chmod g+rw /opt/tfenv/version*
 
-# InSpec Iggy
-RUN apk add --no-cache --virtual .build-deps build-base \
-    && su tfkit -c 'CHEF_LICENSE=accept-no-persist inspec plugin install inspec-iggy' \
-    && apk del .build-deps
+# InSpec Iggy (EOL?  Archived in 2021)
+# RUN apk add --no-cache --virtual .build-deps build-base \
+#     && su tfkit -c 'CHEF_LICENSE=accept-no-persist inspec plugin install inspec-iggy' \
+#     && apk del .build-deps
 
 ENV KITCHEN_YAML=.kitchen.tf.yml
 ENV KITCHEN_LOCAL_YAML=.kitchen.tf.local.yml
