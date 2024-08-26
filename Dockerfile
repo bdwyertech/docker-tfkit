@@ -27,7 +27,7 @@ USER root
 RUN apk add --no-cache --virtual .build-deps build-base git \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 minitest \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.1.0 rake -x \
-    && gem install bundler:2.3.7 \
+    && gem install bundler:2.3.27 \
     && bundle install \
     && apk del .build-deps \
     && rm -rf ~/.bundle Gemfile Gemfile.lock
