@@ -61,22 +61,31 @@ RUN apk add --no-cache python3 py3-pip \
     && rm -rf ~/.cache requirements.txt
 
 # YQ
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/mikefarah/yq/releases/latest | grep -o -E "https://.+?_linux_amd64" -m 1)" -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq)
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/mikefarah/yq/releases/latest | grep -o -E "https://.+?_linux_$TARGETARCH" -m 1)" -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq)
 
 # TFLint
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_amd64.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
-
-# Terrascan
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/accurics/terrascan/releases/latest | grep -o -E "https://.+?Linux_x86_64.tar.gz")" | tar zxf - --directory /usr/local/bin)
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_$TARGETARCH.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
 
 # TFSec
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-amd64" | head -1)" -o /usr/local/bin/tfsec && chmod +x /usr/local/bin/tfsec)
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-$TARGETARCH" | head -1)" -o /usr/local/bin/tfsec && chmod +x /usr/local/bin/tfsec)
 
 # TerraGrunt
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep -o -E "https://.+?terragrunt_linux_amd64")" -o /usr/local/bin/terragrunt && chmod +x /usr/local/bin/terragrunt)
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep -o -E "https://.+?terragrunt_linux_$TARGETARCH")" -o /usr/local/bin/terragrunt && chmod +x /usr/local/bin/terragrunt)
+
+# Terrascan
+RUN set -eux; \
+    case "$TARGETARCH" in \
+      amd64) TERRASCAN_ARCH="x86_64" ;; \
+      arm64) TERRASCAN_ARCH="arm64" ;; \
+      *) echo "Unsupported architecture: $TARGETARCH" && exit 1 ;; \
+    esac; \
+    curl -sfL "$(curl -Ls https://api.github.com/repos/tenable/terrascan/releases/latest \
+      | grep -o -E "https://.+?Linux_${TERRASCAN_ARCH}\.tar\.gz" -m 1)" \
+      | tar zxf - --directory /usr/local/bin
 
 # Azure CLI Login
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/bdwyertech/go-az/releases/latest | grep -o -E "https://.+?az_linux_arm64.tar.gz")" | tar zxf - --directory /usr/local/bin)
+RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/bdwyertech/go-az/releases/latest | grep -o -E "https://.+?az_linux_$TARGETARCH.tar.gz")" | tar zxf - --directory /usr/local/bin)
+
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
