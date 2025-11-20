@@ -4,21 +4,21 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 LABEL org.opencontainers.image.title="bdwyertech/tfkit" \
-      org.opencontainers.image.description="Infrastructure as code development & testing via kitchen-terraform" \
-      org.opencontainers.image.authors="Brian Dwyer <bdwyertech@github.com>" \
-      org.opencontainers.image.url="https://hub.docker.com/r/bdwyertech/tfkit" \
-      org.opencontainers.image.source="https://github.com/bdwyertech/docker-tfkit.git" \
-      org.opencontainers.image.revision=$VCS_REF \
-      org.opencontainers.image.created=$BUILD_DATE \
-      org.label-schema.name="bdwyertech/tfkit" \
-      org.label-schema.description="Infrastructure as code development & testing via kitchen-terraform" \
-      org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
-      org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git" \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.build-date=$BUILD_DATE \
-      org.tooling.user=tfkit \
-      org.tooling.uid=1000 \
-      org.tooling.gid=1000
+    org.opencontainers.image.description="Infrastructure as code development & testing via kitchen-terraform" \
+    org.opencontainers.image.authors="Brian Dwyer <bdwyertech@github.com>" \
+    org.opencontainers.image.url="https://hub.docker.com/r/bdwyertech/tfkit" \
+    org.opencontainers.image.source="https://github.com/bdwyertech/docker-tfkit.git" \
+    org.opencontainers.image.revision=$VCS_REF \
+    org.opencontainers.image.created=$BUILD_DATE \
+    org.label-schema.name="bdwyertech/tfkit" \
+    org.label-schema.description="Infrastructure as code development & testing via kitchen-terraform" \
+    org.label-schema.url="https://hub.docker.com/r/bdwyertech/tfkit" \
+    org.label-schema.vcs-url="https://github.com/bdwyertech/docker-tfkit.git" \
+    org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.build-date=$BUILD_DATE \
+    org.tooling.user=tfkit \
+    org.tooling.uid=1000 \
+    org.tooling.gid=1000
 
 COPY Gemfile Gemfile.lock /
 
@@ -59,33 +59,29 @@ RUN apk add --no-cache python3 py3-pip \
     && python3 -m pip install --no-cache-dir --break-system-packages -r requirements.txt --ignore-installed six  \
     && apk del .build-deps \
     && rm -rf ~/.cache requirements.txt
-
 # YQ
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/mikefarah/yq/releases/latest | grep -o -E "https://.+?_linux_$TARGETARCH" -m 1)" -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq)
+RUN TARGETARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') && \
+    (curl -sfL "$(curl -Ls https://api.github.com/repos/mikefarah/yq/releases/latest | grep -o -E "https://.+?_linux_$TARGETARCH" -m 1)" -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq)
 
 # TFLint
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_$TARGETARCH.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
+RUN TARGETARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') && \
+    (curl -sfL "$(curl -Ls https://api.github.com/repos/terraform-linters/tflint/releases/latest | grep -o -E "https://.+?_linux_$TARGETARCH.zip")" -o tflint.zip && unzip tflint.zip -d /usr/local/bin && rm tflint.zip)
 
 # TFSec
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-$TARGETARCH" | head -1)" -o /usr/local/bin/tfsec && chmod +x /usr/local/bin/tfsec)
+RUN TARGETARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') && \
+    (curl -sfL "$(curl -Ls https://api.github.com/repos/aquasecurity/tfsec/releases/latest | grep -o -E "https://.+?tfsec-linux-$TARGETARCH" | head -1)" -o /usr/local/bin/tfsec && chmod +x /usr/local/bin/tfsec)
 
 # TerraGrunt
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep -o -E "https://.+?terragrunt_linux_$TARGETARCH")" -o /usr/local/bin/terragrunt && chmod +x /usr/local/bin/terragrunt)
+RUN TARGETARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') && \
+    (curl -sfL "$(curl -Ls https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest | grep -o -E "https://.+?terragrunt_linux_$TARGETARCH" | head -1)" -o /usr/local/bin/terragrunt && chmod +x /usr/local/bin/terragrunt)
 
 # Terrascan
-RUN set -eux; \
-    case "$TARGETARCH" in \
-      amd64) TERRASCAN_ARCH="x86_64" ;; \
-      arm64) TERRASCAN_ARCH="arm64" ;; \
-      *) echo "Unsupported architecture: $TARGETARCH" && exit 1 ;; \
-    esac; \
-    curl -sfL "$(curl -Ls https://api.github.com/repos/tenable/terrascan/releases/latest \
-      | grep -o -E "https://.+?Linux_${TERRASCAN_ARCH}\.tar\.gz" -m 1)" \
-      | tar zxf - --directory /usr/local/bin
+RUN TARGETARCH=$(uname -m | sed 's/x86_64/x86_64/' | sed 's/aarch64/arm64/') && \
+    (curl -sfL "$(curl -Ls https://api.github.com/repos/accurics/terrascan/releases/latest | grep -o -E "https://.+?Linux_${TARGETARCH}.tar.gz")" | tar zxf - --directory /usr/local/bin)
 
 # Azure CLI Login
-RUN (curl -sfL "$(curl -Ls https://api.github.com/repos/bdwyertech/go-az/releases/latest | grep -o -E "https://.+?az_linux_$TARGETARCH.tar.gz")" | tar zxf - --directory /usr/local/bin)
-
+RUN TARGETARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') && \
+    (curl -sfL "$(curl -Ls https://api.github.com/repos/bdwyertech/go-az/releases/latest | grep -o -E "https://.+?az_linux_$TARGETARCH.tar.gz")" | tar zxf - --directory /usr/local/bin)
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
