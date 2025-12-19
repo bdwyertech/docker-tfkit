@@ -32,6 +32,17 @@ RUN apk add --no-cache --virtual .build-deps build-base git libffi-dev yaml-dev 
     && apk del .build-deps \
     && rm -rf ~/.bundle Gemfile Gemfile.lock
 
+RUN for d in /usr/local/bundle/bundler/gems/kitchen-terraform*; do \
+    if [ -d "$d" ]; then \
+    cd "$d"; \
+    gemspec=$(ls *.gemspec 2>/dev/null | head -n1 || true); \
+    if [ -n "$gemspec" ]; then \
+    gem build "$gemspec"; \
+    gem install --no-document -i /usr/local/lib/ruby/gems/3.4.0 ./*.gem || true; \
+    fi; \
+    fi; \
+    done
+
 # Hide deprecation warnings (dry-logic-0.6.1 and dry-types-0.14.1)
 ENV RUBYOPT='-W:no-deprecated -W:no-experimental'
 
