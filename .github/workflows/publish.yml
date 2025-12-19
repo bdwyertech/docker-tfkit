@@ -19,6 +19,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write  # Required for provenance metadata
+      security-events: write # For Scan results
 
     steps:
       - name: Checkout repository
@@ -37,9 +39,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Set Parameters
+        id: params
+        run: |
+          echo "date=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+          echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -53,7 +57,7 @@ jobs:
           flavor: |
             latest=true
           tags: |
-            type=sha,enable=true,priority=100,prefix=${{ steps.date.outputs.date }}--,suffix=,format=short
+            type=sha,enable=true,priority=100,prefix=${{ steps.params.outputs.date }}--,suffix=,format=short
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -69,3 +73,19 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          provenance: true
+          sbom: true
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.params.outputs.date }}--${{ steps.params.outputs.sha_short }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+  
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+          category: 'container-security'
