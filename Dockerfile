@@ -24,7 +24,7 @@ COPY Gemfile Gemfile.lock /
 
 USER root
 
-RUN apk add --no-cache --virtual .build-deps build-base git libffi-dev \
+RUN apk add --no-cache --virtual .build-deps build-base git libffi-dev yaml-dev \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.4.0 minitest \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.4.0 rake -x \
     && gem install bundler:2.6.9 \

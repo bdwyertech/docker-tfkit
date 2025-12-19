@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'kitchen-inspec'
-gem 'kitchen-terraform'
+gem 'kitchen-terraform', github: 'bdwyertech/kitchen-terraform'
 
 gem 'awspec'
 gem 'kitchen-verifier-awspec'
