@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bdwyertech/kitchen-terraform.git
-  revision: 6d48b171317e88d8f31625ec2e4b1b6a90693d51
+  revision: a8a02e656cdd335b6acc8b13a1345a81a4cf28c2
   specs:
     kitchen-terraform (7.0.2)
       delegate (>= 0.3.0)
