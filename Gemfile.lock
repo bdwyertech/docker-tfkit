@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bdwyertech/kitchen-terraform.git
-  revision: a8a02e656cdd335b6acc8b13a1345a81a4cf28c2
+  revision: e524b9d2c03494292344e832c090cc54dd6e72b5
   specs:
     kitchen-terraform (7.0.2)
       delegate (>= 0.3.0)
@@ -13,12 +13,11 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.1.6)
+    activesupport (7.0.10)
       base64
       benchmark (>= 0.3)
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      connection_pool (>= 2.2.5)
       drb
       i18n (>= 1.6, < 2)
       logger (>= 1.4.2)
@@ -1574,10 +1573,12 @@ GEM
       ms_rest_azure (~> 0.12.0)
     base64 (0.1.2)
     bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-x86_64-darwin)
     benchmark (0.5.0)
     bigdecimal (3.3.1)
     bson (4.15.0)
     builder (3.3.0)
+    cgi (0.5.1)
     chef-config (18.8.54)
       addressable
       chef-utils (= 18.8.54)
@@ -1592,7 +1593,6 @@ GEM
       concurrent-ruby
     coderay (1.1.3)
     concurrent-ruby (1.3.6)
-    connection_pool (3.0.2)
     cookstyle (8.5.3)
       rubocop (= 1.81.7)
     csv (3.3.5)
@@ -1642,7 +1642,8 @@ GEM
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
     ed25519 (1.4.0)
-    erb (6.0.1)
+    erb (4.0.4)
+      cgi (>= 0.3.3)
     erubi (1.13.1)
     excon (1.3.2)
       logger
@@ -1727,7 +1728,7 @@ GEM
       domain_name (~> 0.5)
     httpclient (2.9.0)
       mutex_m
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     inifile (3.0.0)
     inspec (5.21.29)
@@ -1797,8 +1798,7 @@ GEM
       multi_json (~> 1.14)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    minitest (6.0.0)
-      prism (~> 1.5)
+    minitest (5.27.0)
     mixlib-config (3.0.27)
       tomlrb
     mixlib-install (3.12.30)
@@ -1855,11 +1855,11 @@ GEM
     psych (5.3.1)
       date
       stringio
-    public_suffix (7.0.0)
+    public_suffix (6.0.2)
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.3.1)
-    rdoc (7.0.1)
+    rdoc (7.0.2)
       erb
       psych (>= 4.0.0)
       tsort
@@ -2111,7 +2111,7 @@ GEM
       rubyzip (~> 2.0)
       winrm (~> 2.0)
     wisper (2.0.1)
-    zeitwerk (2.7.4)
+    zeitwerk (2.6.18)
 
 PLATFORMS
   aarch64-linux-gnu
