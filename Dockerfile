@@ -24,12 +24,15 @@ COPY Gemfile Gemfile.lock *.gem /
 
 USER root
 
+# We uninstall base64 due to a conflict with awspec
+# Gem::ConflictError: Unable to activate awspec-1.35.0, because base64-0.2.0 conflicts with base64 (~> 0.1.0)
 RUN apk add --no-cache --virtual .build-deps build-base git libffi-dev yaml-dev \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.4.0 minitest \
     && gem uninstall -i /usr/local/lib/ruby/gems/3.4.0 rake -x \
     && gem install bundler:2.6.9 \
     && bundle install \
     && gem install kitchen-terraform-7.0.2.gem \
+    && gem uninstall -i /usr/local/lib/ruby/gems/3.4.0 base64 \
     && apk del .build-deps \
     && rm -rf ~/.bundle Gemfile Gemfile.lock *.gem
 
@@ -86,7 +89,7 @@ RUN TARGETARCH=$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/') && \
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
-USER tfkit
+# USER tfkit
 WORKDIR /tfkit
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["kitchen"]

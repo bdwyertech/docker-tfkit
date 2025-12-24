@@ -1,6 +1,7 @@
 GIT
   remote: https://github.com/bdwyertech/kitchen-terraform.git
   revision: e524b9d2c03494292344e832c090cc54dd6e72b5
+  branch: master
   specs:
     kitchen-terraform (7.0.2)
       delegate (>= 0.3.0)
@@ -1720,6 +1721,8 @@ GEM
       builder (>= 2.1.2)
       rexml (~> 3.0)
     hashie (4.1.0)
+    hcl_parser (0.2.2)
+      rhcl
     highline (3.1.2)
       reline
     http-cookie (1.1.0)
@@ -2128,11 +2131,11 @@ PLATFORMS
 
 DEPENDENCIES
   awspec
+  hcl_parser
   inspec-bin
   kitchen-inspec
   kitchen-terraform!
   kitchen-verifier-awspec
-  rhcl
 
 BUNDLED WITH
    2.6.9
