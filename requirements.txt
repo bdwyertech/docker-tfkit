@@ -110,7 +110,7 @@ typing-inspection==0.4.2 ; python_version >= '3.9'
 tzdata==2025.3 ; python_version >= '2'
 unidiff==0.7.5
 uritools==5.0.0 ; python_version >= '3.9'
-urllib3==2.6.2 ; python_version >= '3.9'
+urllib3==2.6.3 ; python_version >= '3.9'
 wcwidth==0.2.14 ; python_version >= '3.6'
 xmltodict==1.0.2 ; python_version >= '3.9'
 yarl==1.22.0 ; python_version >= '3.9'
